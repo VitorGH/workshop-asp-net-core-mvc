@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using System.Diagnostics;
 
 namespace SalesWebMvc.Models
 {
@@ -16,24 +17,28 @@ namespace SalesWebMvc.Models
         [EmailAddress(ErrorMessage = "Enter a valid email")]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "{0} required")]
         [Display(Name = "Birth Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:dd/MM/yyyy}")]
-        [Required(ErrorMessage = "{0} required")]
         public DateTime BirthDate { get; set; }
 
         [Required(ErrorMessage = "{0} required")]
+        [Range(100.0, 50000.0, ErrorMessage = "{0} must be from {1} to {2}")]
         [Display(Name = "Base Salary")]
         [DisplayFormat(DataFormatString = "{0:F2}")]
-        [Range(100.0, 50000.0, ErrorMessage = "{0} must be from {1} to {2}")]
         public double BaseSalary { get; set; }
+
         public Department Department { get; set; }
         public ICollection<SalesRecord> Sales { get; set; } = new List<SalesRecord>();
+
         public int DepartmentId { get; set; }
+
         public Seller() { }
 
         public Seller(int id, string name, string email, DateTime birthDate, double baseSalary, Department department)
         {
+            Debug.Write("debug seller");
             Id = id;
             Name = name;
             Email = email;
