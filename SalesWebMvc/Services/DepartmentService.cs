@@ -6,6 +6,7 @@ namespace SalesWebMvc.Services
     public class DepartmentService
     {
         private readonly SalesWebMvcContext _context;
+        
         public DepartmentService(SalesWebMvcContext context)
         {
             _context = context;
@@ -13,7 +14,7 @@ namespace SalesWebMvc.Services
 
         public async Task<List<Department>> FindAllAsync()
         {
-            return await _context.Department.OrderByDescending(x => x.Name).ToListAsync();
+            return await _context.Department.OrderBy(x => x.Name).ToListAsync();
         }
     }
 }
